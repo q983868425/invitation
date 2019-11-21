@@ -1,0 +1,21 @@
+#端口及项目访问路径
+server:
+  port: 8080
+  servlet:    context-path: /invitation
+#SpringMVC视图解析
+spring:  mvc:    view:      prefix: /WEB-INF/jsp/
+      suffix: .jsp   
+      #设置action匹配后缀
+    pathmatch:      use-suffix-pattern: false
+      use-registered-suffix-pattern: true
+  datasource:    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/imdb?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+#mybatis包扫描路径，先添加mybatis依赖
+mybatis:  type-aliases-package: com.company.pojo
+  mapper-locations: classpath:mappers/*.xml
+  
+  
+  
+    

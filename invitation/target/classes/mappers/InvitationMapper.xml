@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.dao.InvitationDao">
+	<!-- 查询所有,添加分页 -->
+	<select id="selectAll" resultType="Invitation">
+		select * from invitation where 1=1 limit #{page},#{count}
+	</select>
+
+	<!-- 获取表中的总数据，确定页数 -->
+	<select id="selectcount" resultType="int">
+		select count(*) from invitation
+	</select>
+	<!-- 根据id查询 -->
+	<select id="selectById" resultType="Invitation">
+		select * from invitation
+		where id =#{id}
+	</select>
+	<!-- 添加帖子 -->
+	<insert id="add">
+		insert into invitation
+		(title,summary,author,createdate) values
+		(#{title},#{summary},#{author},#{createdate})
+	</insert>
+	<!-- 根绝id数组删除帖子 -->
+	<delete id="deleteById">
+		DELETE
+		FROM `imdb`.`invitation`
+		WHERE `id` in
+		<foreach collection="array" item="id" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+	<!-- 更新帖子 -->
+	<update id="update">
+		UPDATE `imdb`.`invitation`
+		SET `title` = #{title},
+		`summary` = #{summary},
+		`author` = #{author},
+		`createdate` =
+		#{createdate}
+		WHERE `id`
+		= #{id};
+	</update>
+</mapper>
